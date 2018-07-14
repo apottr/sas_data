@@ -1,23 +1,27 @@
-const pdfText = require("pdf-text")
 const fs = require("fs")
+const f = require("./functions.js")
 
-const read_file = (callback) => {
-    pdfText("/Users/amy/sas_data/SAS-BP-Law-enforcement-firearms-annexe.pdf", (err, chunks) => {
-        if (err) throw err
-        callback(chunks)
-    })
-}
 
 const main = () => {
     const offset = 21
-    read_file((chunks) => {
-        let local_offset = 0
-        for(let i = 0; i<chunks.length-offset; i++){
-            console.log(chunks[i+offset])
+    const fn = "./SAS-BP-Law-enforcement-firearms-annexe.pdf"
+    const headers = [
+        "Country Code",
+        "Country",
+        "Continent",
+        "Sub-Region",
+        "Population (2017)",
+        "Category",
+        "Active Personnel",
+        "Law Enforcement Firearms",
+        "Computation Method"
+    ]
+    f.parse(fn,offset,(data) => {
+        for(let i = 0; i<5; i++){
+            console.log(data[i])
+            console.log(f.makeObj(headers,data[i]))
         }
     })
 }
-
-
 
 main()
