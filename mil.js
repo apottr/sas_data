@@ -18,8 +18,12 @@ const main = () => {
     ]
     f.parse(fn,offset,(data) => {
         for(let i = 0; i<5; i++){
-            console.log(data[i])
-            console.log(f.makeObj(headers,data[i]))
+            console.log("mil",data[i])
+            let idx = data[i].indexOf("all active military")
+            if(idx != -1){
+                console.log(f.subcat(data[i],idx))
+            }
+            console.log("mil parsed ",f.makeObj(headers,data[i]))
         }
     })
 }

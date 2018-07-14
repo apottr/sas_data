@@ -33,5 +33,16 @@ const parse = (fn,off,cb) => {
     })
 }
 
+const subcat = (data, si) => {
+    out = {}
+    for(let i = si; i<data.length; i++){
+        if(data[i].match(/[A-z]/)){
+            out[data[i]] = data[i+1]
+        }
+    }
+    return out
+}
+
 exports.parse = parse
 exports.makeObj = makeObj
+exports.subcat = subcat
